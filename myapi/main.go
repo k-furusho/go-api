@@ -13,8 +13,12 @@ func main()  {
 			io.WriteString(w, "Hello, World!\n")
 		}
 
-		// 定義したhelloHandlerを使うように登録
-		http.HandleFunc("/", helloHandler)
+		postArticleHandler := func(w http.ResponseWriter, req *http.Request) {
+			io.WriteString(w, "Posting Article...\n")
+		}
+
+		http.HandleFunc("/hello", helloHandler)
+		http.HandleFunc("/article", postArticleHandler)
 
 		// サーバー起動時のログを出力
 		log.Println("server start at port 8080")
