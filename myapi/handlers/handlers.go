@@ -8,10 +8,14 @@ import (
 
 // /handler のハンドラ
 func HelloHandler(w http.ResponseWriter, req *http.Request) {
-	// もしrequestの中のMethodフィールドがGETだったら
+	// requestの中のMethodフィールドがGETの場合
 	if req.Method == http.MethodGet {
 		// 通常通りに"Hello, World!”の文字列を返す
 		io.WriteString(w, "Hello, World!\n")
+
+	} else {
+		// Invalid methodというレスポンスを、405番のステータスコードと共に返す
+		http.Error(w, "Invalid method", http.StatusMethodNotAllowed)
 	}
 }
 
